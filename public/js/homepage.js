@@ -8,17 +8,28 @@ let calendar = new FullCalendar.Calendar(cal, {
         center: 'title',
         right: 'dayGridMonth,timeGridWeek,listWeek'
     },
-    events: []
+    events: [],
+    eventClick: function(info) {
+        const eventInfo = info.event._def.title
+        const clickedEvent = eventInfo.split(' live at ')
+        const eventBand = clickedEvent[0]
+        const eventVenue = clickedEvent[1]
+
+        fetch(`/api/gigs/search`, {
+            method: 'POST',
+            body: JSON.stringify({ eventBand, eventVenue }),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(response => {
+            document.location.replace(`/eventprofile/${response}`)
+        })
+    }
 })
 
 calendar.render()
-
-const viewPage = (event) => {
-    event.preventDefault()
-    console.log('clicked')
-
-    // document.location.replace(`/api/${id}`)
-}
 
 const getCalendarData = () => {
     fetch(`/api/gigs`, {
@@ -38,11 +49,6 @@ const getCalendarData = () => {
             }
             calendar.addEvent(calendarEvent)
         }
-    })
-    .then(() => {
-        [...document.querySelectorAll('.fc-event-title')]
-            .forEach(day => day
-            .addEventListener('click', viewPage))
     })
 }
 

@@ -77,6 +77,22 @@ router.get('/venueprofile/:id', async (req, res) => {
   }
 })
 
+router.get('/eventprofile/:id', async (req, res) => {
+  try {
+    const userData = await Gigs.findByPk(req.params.id)
+
+    const gig = userData.get({ plain: true })
+
+    res.render('profile', {
+      gig,
+      logged_in: req.session.logged_in
+    })
+  } catch (err) {
+    res.status(500).json(err)
+    console.log(err)
+  }
+})
+
 router.get('/login', (req, res) => {
   // If the user is already logged in, redirect the request to another route
   if (req.session.logged_in) {

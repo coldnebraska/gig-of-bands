@@ -15,4 +15,23 @@ router.get('/', async (req, res) => {
     }
 })
 
+router.post('/search', async (req, res) => {
+    try {
+        gigData = await Gigs.findAll({
+            include: [{model: Bands}, {model: Venues}]
+        })
+
+        let id
+        gigData.forEach(element => {
+            if (req.body.eventBand == element.dataValues.band.name && req.body.eventVenue == element.dataValues.venue.name) {
+                id = element.dataValues.id
+            }
+        })
+        res.status(200).json(id)
+    } catch (err) {
+        res.status(400).json(err)
+        console.log(err)
+    }
+})
+
 module.exports = router
