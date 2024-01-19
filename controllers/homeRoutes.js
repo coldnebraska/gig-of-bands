@@ -4,9 +4,7 @@ const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
   try {
-    const gigData = await Gigs.findAll({
-      include: [{ model: Bands, attributes: { exclude: ['username', 'password']} }, { model: Venues, attributes: { exclude: ['username', 'password']} }]
-    })
+    const gigData = await Gigs.findAll()
 
     const events = gigData.map((gig) => gig.get({ plain: true }))
 
