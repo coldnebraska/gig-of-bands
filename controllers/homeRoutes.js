@@ -30,8 +30,8 @@ router.get('/profile', withAuth, async (req, res) => {
     const band = userData.get({ plain: true });
 
     res.render('profile', {
-      
       band,
+      myprofile: true,
       logged_in: true
     });
   } catch (err) {
