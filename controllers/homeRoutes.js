@@ -19,19 +19,37 @@ router.get('/', async (req, res) => {
 
 router.get('/myprofile', withAuth, async (req, res) => {
   try {
-    // Find the logged in user based on the session ID
-    const userData = await Bands.findByPk(req.session.user_id, {
-      attributes: { exclude: ['password'] },
-      include: [{ model: Gigs }],
-    });
+    const accountType = req.session.account
 
-    const band = userData.get({ plain: true });
-
-    res.render('profile', {
-      band,
-      myprofile: true,
-      logged_in: true
-    });
+    if (accountType == 'band') {
+      // Find the logged in user based on the session ID
+      const userData = await Bands.findByPk(req.session.user_id, {
+        attributes: { exclude: ['password'] },
+        include: [{ model: Gigs }],
+      })
+  
+      const band = userData.get({ plain: true })
+  
+      res.render('profile', {
+        band,
+        myprofile: true,
+        logged_in: true
+      })
+    } else {
+      // Find the logged in user based on the session ID
+      const userData = await Venues.findByPk(req.session.user_id, {
+        attributes: { exclude: ['password'] },
+        include: [{ model: Gigs }],
+      })
+  
+      const venue = userData.get({ plain: true })
+  
+      res.render('profile', {
+        venue,
+        myprofile: true,
+        logged_in: true
+      })
+    }
   } catch (err) {
     res.status(500).json(err);
   }
@@ -94,7 +112,7 @@ router.get('/eventprofile/:id', async (req, res) => {
 router.get('/login', (req, res) => {
   // If the user is already logged in, redirect the request to another route
   if (req.session.logged_in) {
-    res.redirect('/profile');
+    res.redirect('/myprofile');
     return;
   }
 

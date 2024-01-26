@@ -34,4 +34,34 @@ router.post('/search', async (req, res) => {
     }
 })
 
+router.get('/search/band', async (req, res) => {
+    try {
+        const gigData = await Gigs.findAll({
+            where: {band_id: req.session.user_id},
+            include: [{ model: Bands, attributes: { exclude: ['username', 'password']} }, { model: Venues, attributes: { exclude: ['username', 'password']} }]
+        })
+
+        const gigs = gigData.map((gig) => gig.get({ plain: true }))
+        
+        res.status(200).json(gigs)
+    } catch(err) {
+        res.status(400).json(err)
+    }
+})
+
+router.get('/search/venue', async (req, res) => {
+    try {
+        const gigData = await Gigs.findAll({
+            where: {venue_id: req.session.user_id},
+            include: [{ model: Bands, attributes: { exclude: ['username', 'password']} }, { model: Venues, attributes: { exclude: ['username', 'password']} }]
+        })
+
+        const gigs = gigData.map((gig) => gig.get({ plain: true }))
+        
+        res.status(200).json(gigs)
+    } catch(err) {
+        res.status(400).json(err)
+    }
+})
+
 module.exports = router

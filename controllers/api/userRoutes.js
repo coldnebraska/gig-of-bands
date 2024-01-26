@@ -3,8 +3,9 @@ const { Bands, Venues } = require('../../models');
 
 router.post('/login', async (req, res) => {
   try {
+    let accountType = req.body.dropbox
     let userData 
-    if(req.body.dropbox == 'band') {
+    if(accountType == 'band') {
       userData = await Bands.findOne({ where: { username: req.body.username } });
     } else if (req.body.dropbox == 'venue') {
       userData = await Venues.findOne({ where: { username: req.body.username } });
@@ -26,12 +27,24 @@ router.post('/login', async (req, res) => {
       return;
     }
 
-    req.session.save(() => {
-      req.session.user_id = userData.id;
-      req.session.logged_in = true;
-      
-      res.json({ user: userData, message: 'You are now logged in!' });
-    });
+    if (accountType == 'band') {
+      req.session.save(() => {
+        req.session.account = 'band'
+        req.session.user_id = userData.id;
+        req.session.logged_in = true;
+        
+        res.json({ user: userData, message: 'You are now logged in!' });
+      })
+    } else {
+      req.session.save(() => {
+        req.session.account = 'venue'
+        req.session.user_id = userData.id;
+        req.session.logged_in = true;
+        
+        res.json({ user: userData, message: 'You are now logged in!' });
+      })
+    }
+    console.log(req.session)
 
   } catch (err) {
     res.status(400).json(err);

@@ -5,17 +5,17 @@
                 <h1>My Profile</h1>
                 {{/if}}
                 {{#if band}}
-                <h2 class="text-2xl text-white font-bold">{{band.name}}</h2>
-                <p class="text-white">Genre: {{band.genre}}</p>
+                <h2 id="search-name" class="text-2xl text-white font-bold">{{band.name}}</h2>
+                <p id="genre" class="text-white">Genre: {{band.genre}}</p>
                 {{/if}}
                 {{#if venue}}
-                <h2 class="text-2xl text-white font-bold">{{venue.name}}</h2>
+                <h2 id="search-name" class="text-2xl text-white font-bold">{{venue.name}}</h2>
                 {{/if}}
             </div>
         </div>
     </div>
     {{#if myprofile}}
-        <h1>Add Event</h1>
+        <button id="add-event">Add Event</button>
     {{/if}}
 
 <div id="calendar" style="max-width: 1000px; margin:0 auto"></div>
