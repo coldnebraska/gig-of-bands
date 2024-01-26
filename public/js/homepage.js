@@ -1,6 +1,6 @@
-const cal = document.getElementById('calendar2')
+const homeCal = document.getElementById('calendar2')
 
-let calendar = new FullCalendar.Calendar(cal, {
+let calendar = new FullCalendar.Calendar(homeCal, {
     initialView: 'dayGridMonth',
     selectable: true,
     headerToolbar: {

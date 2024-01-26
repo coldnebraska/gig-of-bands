@@ -1,11 +1,16 @@
 <div class="container mx-auto flex justify-center items-center p-6">
-        <div class="max-w-md bg-white p-6 rounded-md shadow-md">
+        <div class="profile-header max-w-md bg-slate-400 p-6 rounded-md shadow-md">
             <div class="text-center">
                 {{#if myprofile}}
                 <h1>My Profile</h1>
                 {{/if}}
-                <h2 class="text-2xl font-bold">{{band.name}}</h2>
-                <p class="text-gray-600">Genre: {{band.genre}}</p>
+                {{#if band}}
+                <h2 class="text-2xl text-white font-bold">{{band.name}}</h2>
+                <p class="text-white">Genre: {{band.genre}}</p>
+                {{/if}}
+                {{#if venue}}
+                <h2 class="text-2xl text-white font-bold">{{venue.name}}</h2>
+                {{/if}}
             </div>
         </div>
     </div>
