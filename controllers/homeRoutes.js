@@ -17,10 +17,8 @@ router.get('/', async (req, res) => {
   }
 })
 
-// Use withAuth middleware to prevent access to route
-router.get('/profile', withAuth, async (req, res) => {
+router.get('/myprofile', withAuth, async (req, res) => {
   try {
-    console.log("user id", req.session.user_id)
     // Find the logged in user based on the session ID
     const userData = await Bands.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },

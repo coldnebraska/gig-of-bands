@@ -27,9 +27,11 @@
                 <li class="mx-4 my-6 md:my-0">
                     <a href="/#event" class="text-xl hover:text-yellow-300 hover:underline decoration-sky-500 duration-500">Events</a>
                 </li>
+                {{#if logged_in}}
                 <li class="mx-4 my-6 md:my-0">
-                    <a href="/profile" class="text-xl hover:text-yellow-300 hover:underline decoration-sky-500 duration-500">My Profile</a>
+                    <a href="/myprofile" class="text-xl hover:text-yellow-300 hover:underline decoration-sky-500 duration-500">My Profile</a>
                 </li>
+                {{/if}}
                 <li class="mx-4 my-6 md:my-0">
                     <div>
                         {{#if logged_in}}

@@ -4,17 +4,19 @@
   </div>
   <h1 class="text-4xl font-serif font-bold">The connection between performers and venues</h1>
 </div>
-<div id="homepage_performers"class="grid grid-cols-2 gap-8 p-8">
-  <div class="h-96 bg-white container border rounded-lg overflow-hidden text-center font-serif font-bold">
-    <h2 class="image-title  text-3xl" id="performers-title">Performers</h2>
-    <img src="/images/band2.jpg" alt="Performers Image" class="homepage-img" id="performers">
-    
-  </div>
-  <div id="homepage_venue"class="h-96 bg-white container border rounded-lg overflow-hidden text-center font-serif font-bold">
-    <h2 class="image-title text-3xl" id="venues-title">Venues</h2>
-    <img src="/images/venue2.jpg" alt="Venues Image" class="homepage-img" id="venues">
-    
-  </div>
+<div class="grid grid-cols-2 gap-8 p-8">
+  <a href="/api/performers">
+    <div id="homepage-performers" class="h-96 bg-white container border rounded-lg overflow-hidden text-center font-serif font-bold">
+      <h2 class="image-title  text-3xl" id="performers-title">Performers</h2>
+      <img src="/images/band2.jpg" alt="Performers Image" class="homepage-img" id="performers">
+    </div>
+  </a>
+  <a href="/api/venues">
+    <div id="homepage-venue"class="h-96 bg-white container border rounded-lg overflow-hidden text-center font-serif font-bold">
+      <h2 class="image-title text-3xl" id="venues-title">Venues</h2>
+      <img src="/images/venue2.jpg" alt="Venues Image" class="homepage-img" id="venues">  
+    </div>
+  </a>
 </div>
 
 
@@ -23,7 +25,7 @@
 <div id="calendar2" style="max-width: 1000px; margin:0 auto"></div>
 
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
-<script src="../public/js/homepage.js" ></script>
+<script src="/js/homepage.js" ></script>
 
 
 
